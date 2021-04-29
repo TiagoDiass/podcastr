@@ -1,19 +1,18 @@
-import Document from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const sheet = new ServerStyleSheet()
-    const originalRenderPage = ctx.renderPage
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
 
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
-        })
+          enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
+        });
 
-      const initialProps = await Document.getInitialProps(ctx)
+      const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
         styles: (
@@ -22,9 +21,47 @@ export default class MyDocument extends Document {
             {sheet.getStyleElement()}
           </>
         ),
-      }
+      };
     } finally {
-      sheet.seal()
+      sheet.seal();
     }
+  }
+
+  render() {
+    return (
+      <Html>
+        <Head>
+          <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link
+            href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lexend:wght@300;500;600&display=swap'
+            rel='stylesheet'
+          />
+
+          {/* <link
+            rel='icon'
+            href='/favicon-32x32.png?v=a07f423b8bbf4a50c2c449b96795fcb6'
+            type='image/png'
+          ></link>
+
+          <meta property='og:image' content='/thumbnaill.png' /> */}
+
+          {/* <meta
+            name='description'
+            content='Photosnap | The best platform for photographers and visual storytellers!'
+          />
+
+          <meta property='og:title' content='Photosnap | Tell people your photo stories' />
+
+          <meta
+            property='og:description'
+            content='Photosnap is a platform for photographers and visual storytellers. We make it easy to share photos, tell stories and connect with others.'
+          /> */}
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }
