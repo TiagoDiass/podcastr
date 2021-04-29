@@ -37,13 +37,11 @@ export default class MyDocument extends Document {
             rel='stylesheet'
           />
 
-          {/* <link
-            rel='icon'
-            href='/favicon-32x32.png?v=a07f423b8bbf4a50c2c449b96795fcb6'
-            type='image/png'
-          ></link>
+          <title>Podcastr</title>
 
-          <meta property='og:image' content='/thumbnaill.png' /> */}
+          <link rel='icon' href='/favicon.png' type='image/png' />
+
+          {/* <meta property='og:image' content='/thumbnaill.png' /> */}
 
           {/* <meta
             name='description'
