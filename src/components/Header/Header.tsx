@@ -1,5 +1,6 @@
 import format from 'date-fns/format';
 import ptBR from 'date-fns/locale/pt-BR';
+import Link from 'next/link';
 import { Logo } from 'components';
 import * as S from './Header.styles';
 
@@ -8,7 +9,11 @@ export default function Header() {
 
   return (
     <S.HeaderContainer>
-      <Logo />
+      <Link href='/'>
+        <a href='/'>
+          <Logo />
+        </a>
+      </Link>
 
       <S.Slogan>O melhor lugar para você ouvir podcasts, sempre.</S.Slogan>
 
