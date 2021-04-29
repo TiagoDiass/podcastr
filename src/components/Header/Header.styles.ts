@@ -15,7 +15,7 @@ export const Slogan = styled.p`
   border-left: 1px solid var(--gray-100);
 `;
 
-export const Date = styled.span`
+export const Date = styled.time`
   margin-left: auto;
   text-transform: capitalize;
 `;

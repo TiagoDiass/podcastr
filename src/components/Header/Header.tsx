@@ -17,7 +17,7 @@ export default function Header() {
 
       <S.Slogan>O melhor lugar para você ouvir podcasts, sempre.</S.Slogan>
 
-      <S.Date>{currentDate}</S.Date>
+      <S.Date data-testid='current-date'>{currentDate}</S.Date>
     </S.HeaderContainer>
   );
 }
