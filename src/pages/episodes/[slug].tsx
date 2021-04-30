@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
+import Head from 'next/head';
 
 import api from 'services/api';
 import { convertDurationToTimeString } from 'utils';
@@ -26,28 +27,37 @@ type EpisodeProps = {
 
 export default function Episode({ episode }: EpisodeProps) {
   return (
-    <S.EpisodeContainer>
-      <S.ThumbnailContainer>
-        <button type='button'>
-          <img src='/images/arrow-left.svg' alt='Voltar' />
-        </button>
+    <>
+      <Head>
+        <title>{episode.title} | Podcastr</title>
+      </Head>
 
-        <Image src={episode.thumbnail} width={700} height={160} objectFit='cover' />
+      <S.EpisodeContainer>
+        <S.ThumbnailContainer>
+          <button type='button'>
+            <img src='/images/arrow-left.svg' alt='Voltar' />
+          </button>
 
-        <button type='button'>
-          <img src='/images/play.svg' alt='Tocar episódio' />
-        </button>
-      </S.ThumbnailContainer>
+          <Image src={episode.thumbnail} width={700} height={160} objectFit='cover' />
 
-      <S.Header>
-        <h1>{episode.title}</h1>
-        <span>{episode.members}</span>
-        <span>{episode.publishedAt}</span>
-        <time>{episode.durationString}</time>
-      </S.Header>
+          <button type='button'>
+            <img src='/images/play.svg' alt='Tocar episódio' />
+          </button>
+        </S.ThumbnailContainer>
 
-      <S.Description dangerouslySetInnerHTML={{ __html: episode.description }} />
-    </S.EpisodeContainer>
+        <S.Header>
+          <h1>{episode.title}</h1>
+
+          <div className='dataRow'>
+            <span>{episode.members}</span>
+            <span>{episode.publishedAt}</span>
+            <time>{episode.durationString}</time>
+          </div>
+        </S.Header>
+
+        <S.Description dangerouslySetInnerHTML={{ __html: episode.description }} />
+      </S.EpisodeContainer>
+    </>
   );
 }
 
