@@ -1,5 +1,7 @@
 import { GetStaticProps } from 'next';
+import Link from 'next/link';
 import Image from 'next/image';
+
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
@@ -44,7 +46,9 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
               </div>
 
               <div className='episodeDetails'>
-                <a href=''>{episode.title}</a>
+                <Link href={`/episodes/${episode.id}`}>
+                  <a>{episode.title}</a>
+                </Link>
                 <p>{episode.members}</p>
                 <span>{episode.publishedAt}</span>
                 <time>{episode.durationString}</time>
@@ -63,12 +67,14 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 
         <table cellSpacing={0}>
           <thead>
-            <th></th>
-            <th>Podcast</th>
-            <th>Integrantes</th>
-            <th>Data</th>
-            <th>Duração</th>
-            <th></th>
+            <tr>
+              <th></th>
+              <th>Podcast</th>
+              <th>Integrantes</th>
+              <th>Data</th>
+              <th>Duração</th>
+              <th></th>
+            </tr>
           </thead>
 
           <tbody>
@@ -85,7 +91,9 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                 </td>
 
                 <td>
-                  <a href=''>{episode.title}</a>
+                  <Link href={`/episodes/${episode.id}`}>
+                    <a>{episode.title}</a>
+                  </Link>
                 </td>
 
                 <td>{episode.members}</td>
