@@ -74,19 +74,29 @@ export const Buttons = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 2.5rem;
-  gap: 1.5rem;
+  gap: 1rem;
 
   button {
-    background: transparent;
     border: 0;
     font-size: 0;
+    transition: all 0.15s ease;
+
+    &:not(.playButton) {
+      background: transparent;
+      border-radius: 0.4rem;
+      width: 2.5rem;
+      height: 2.5rem;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
 
     &.playButton {
       width: 4rem;
       height: 4rem;
       border-radius: 1rem;
       background: var(--purple-300);
-      transition: filter 0.15s ease;
 
       &:hover {
         filter: brightness(0.97);
