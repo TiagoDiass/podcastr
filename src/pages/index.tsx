@@ -1,34 +1,61 @@
 import { GetStaticProps } from 'next';
+import Image from 'next/image';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
 import api from 'services/api';
 import { convertDurationToTimeString } from 'utils';
+import * as S from 'pagesStyles/home.styles';
 
 type Episode = {
   id: string;
   title: string;
+  thumbnail: string;
+  description: string;
   members: string;
-  publishedAt: string;
+  duration: number;
   durationString: string;
+  url: string;
+  publishedAt: string;
 };
 
 type HomeProps = {
-  episodes: Episode[];
+  latestEpisodes: Episode[];
+  allEpisodes: Episode[];
 };
 
-export default function Home({ episodes }: HomeProps) {
+export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   return (
-    <>
-      <h1>Página index </h1>
-      <ul>
-        {episodes.map(ep => (
-          <li>
-            {ep.title} === {ep.id} === {ep.publishedAt} === {ep.durationString}
-          </li>
-        ))}
-      </ul>
-    </>
+    <S.HomeContainer>
+      <S.LatestEpisodes>
+        <S.Heading>Últimos lançamentos</S.Heading>
+
+        <ul>
+          {latestEpisodes.map(episode => (
+            <li key={episode.id}>
+              <Image
+                width={192}
+                height={192}
+                objectFit='cover'
+                src={episode.thumbnail}
+                alt={episode.title}
+              />
+
+              <div className='episodeDetails'>
+                <a href=''>{episode.title}</a>
+                <p>{episode.members}</p>
+                <span>{episode.publishedAt}</span>
+                <time>{episode.durationString}</time>
+              </div>
+
+              <button type='button'>
+                <img src='/images/play-green.svg' alt='Tocar episódio' />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </S.LatestEpisodes>
+    </S.HomeContainer>
   );
 }
 
@@ -53,8 +80,11 @@ export const getStaticProps: GetStaticProps = async () => {
     url: episode.file.url,
   }));
 
+  const latestEpisodes = episodes.slice(0, 2);
+  const allEpisodes = episodes.slice(2, episodes.length);
+
   return {
-    props: { episodes },
+    props: { latestEpisodes, allEpisodes },
     revalidate: 60 * 60 * 8,
   };
 };
