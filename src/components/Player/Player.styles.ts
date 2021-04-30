@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const PlayerContainer = styled.aside`
   width: 26.5rem;
   height: 100vh;
-  padding: 3rem 4rem;
+  padding: 3rem 3.5rem;
 
   background: var(--purple-500);
   color: var(--white);

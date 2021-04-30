@@ -33,13 +33,15 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         <ul>
           {latestEpisodes.map(episode => (
             <li key={episode.id}>
-              <Image
-                width={192}
-                height={192}
-                objectFit='cover'
-                src={episode.thumbnail}
-                alt={episode.title}
-              />
+              <div className='imageWrapper' style={{ width: 64 }}>
+                <Image
+                  width={192}
+                  height={192}
+                  objectFit='cover'
+                  src={episode.thumbnail}
+                  alt={episode.title}
+                />
+              </div>
 
               <div className='episodeDetails'>
                 <a href=''>{episode.title}</a>
@@ -55,6 +57,53 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
           ))}
         </ul>
       </S.LatestEpisodes>
+
+      <S.AllEpisodes>
+        <h2>Todos episódios</h2>
+
+        <table cellSpacing={0}>
+          <thead>
+            <th></th>
+            <th>Podcast</th>
+            <th>Integrantes</th>
+            <th>Data</th>
+            <th>Duração</th>
+            <th></th>
+          </thead>
+
+          <tbody>
+            {allEpisodes.map(episode => (
+              <tr key={episode.id}>
+                <td style={{ width: 72 }}>
+                  <Image
+                    width={120}
+                    height={120}
+                    objectFit='cover'
+                    src={episode.thumbnail}
+                    alt={episode.title}
+                  />
+                </td>
+
+                <td>
+                  <a href=''>{episode.title}</a>
+                </td>
+
+                <td>{episode.members}</td>
+
+                <td style={{ width: 100 }}>{episode.publishedAt}</td>
+
+                <td>{episode.durationString}</td>
+
+                <td>
+                  <button type='button'>
+                    <img src='/images/play-green.svg' alt='Tocar episódio' />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </S.AllEpisodes>
     </S.HomeContainer>
   );
 }
