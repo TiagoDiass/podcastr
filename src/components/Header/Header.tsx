@@ -15,7 +15,7 @@ export default function Header() {
         </a>
       </Link>
 
-      <S.Slogan>O melhor lugar para você ouvir podcasts, sempre.</S.Slogan>
+      <S.Slogan>O melhor para você ouvir, sempre.</S.Slogan>
 
       <S.Date data-testid='current-date'>{currentDate}</S.Date>
     </S.HeaderContainer>
