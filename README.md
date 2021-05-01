@@ -10,4 +10,8 @@
 #### To do
 
 - [ ] Tests
+- [ ] Meta tags for episodes pages
 - [ ] Ensure that shuffling is disabled when app plays a single episode
+- [ ] Responsive styles?
+- [ ] PWA
+- [ ] Dark theme
