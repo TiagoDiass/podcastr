@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <S.HeaderContainer>
       <Link href='/'>
-        <a href='/'>
+        <a href='/' title='Navegar para a Home'>
           <Logo />
         </a>
       </Link>
