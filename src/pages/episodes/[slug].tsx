@@ -9,24 +9,13 @@ import * as S from 'pagesStyles/episode.styles';
 
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
-
-type Episode = {
-  id: string;
-  title: string;
-  thumbnail: string;
-  members: string;
-  duration: number;
-  durationString: string;
-  url: string;
-  description: string;
-  publishedAt: string;
-};
+import { Episode } from '@types';
 
 type EpisodeProps = {
   episode: Episode;
 };
 
-export default function Episode({ episode }: EpisodeProps) {
+export default function EpisodePage({ episode }: EpisodeProps) {
   return (
     <>
       <Head>

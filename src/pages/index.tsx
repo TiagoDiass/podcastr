@@ -9,17 +9,7 @@ import ptBR from 'date-fns/locale/pt-BR';
 import api from 'services/api';
 import { convertDurationToTimeString } from 'utils';
 import * as S from 'pagesStyles/home.styles';
-
-type Episode = {
-  id: string;
-  title: string;
-  thumbnail: string;
-  members: string;
-  duration: number;
-  durationString: string;
-  url: string;
-  publishedAt: string;
-};
+import { Episode } from '@types';
 
 type HomeProps = {
   latestEpisodes: Episode[];
