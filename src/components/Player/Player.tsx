@@ -15,6 +15,8 @@ export default function Player() {
     setPlayingState,
     playNextEpisode,
     playPreviousEpisode,
+    hasNext,
+    hasPrevious,
   } = useContext(PlayerContext);
   const episode = episodeList[currentEpisodeIndex];
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -48,8 +50,8 @@ export default function Player() {
         </S.EmptyPlayer>
       )}
 
-      <S.Footer empty={!episode}>
-        <S.Progress>
+      <S.Footer>
+        <S.Progress empty={!episode}>
           <span>00:00</span>
           <div className='slider'>
             {episode ? (
@@ -76,11 +78,11 @@ export default function Player() {
         )}
 
         <S.Buttons>
-          <button type='button' disabled={!episode}>
+          <button type='button' disabled={!episode || episodeList.length === 1}>
             <img src='/images/shuffle.svg' alt='Embaralhar' />
           </button>
 
-          <button type='button' disabled={!episode} onClick={playPreviousEpisode}>
+          <button type='button' disabled={!episode || !hasPrevious} onClick={playPreviousEpisode}>
             <img src='/images/play-previous.svg' alt='Tocar anterior' />
           </button>
 
@@ -92,11 +94,11 @@ export default function Player() {
             )}
           </button>
 
-          <button type='button' disabled={!episode} onClick={playNextEpisode}>
+          <button type='button' disabled={!episode || !hasNext} onClick={playNextEpisode}>
             <img src='/images/play-next.svg' alt='Tocar próxima' />
           </button>
 
-          <button type='button' disabled={!episode}>
+          <button type='button' disabled={!episode || episodeList.length === 1}>
             <img src='/images/repeat.svg' alt='Repetir' />
           </button>
         </S.Buttons>

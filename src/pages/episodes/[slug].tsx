@@ -9,6 +9,7 @@ import * as S from 'pagesStyles/episode.styles';
 
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import { usePlayerContext } from 'contexts/Player.context';
 import { Episode } from '@types';
 
 type EpisodeProps = {
@@ -16,6 +17,8 @@ type EpisodeProps = {
 };
 
 export default function EpisodePage({ episode }: EpisodeProps) {
+  const { play } = usePlayerContext();
+
   return (
     <>
       <Head>
@@ -32,7 +35,7 @@ export default function EpisodePage({ episode }: EpisodeProps) {
 
           <Image src={episode.thumbnail} width={700} height={160} objectFit='cover' />
 
-          <button type='button'>
+          <button type='button' onClick={() => play(episode)}>
             <img src='/images/play.svg' alt='Tocar episódio' />
           </button>
         </S.ThumbnailContainer>

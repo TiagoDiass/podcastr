@@ -61,13 +61,12 @@ export const PlayingEpisode = styled.div`
   }
 `;
 
-export const Footer = styled.footer<{ empty: boolean }>`
+export const Footer = styled.footer`
   align-self: stretch;
-
-  opacity: ${props => (props.empty ? '0.5' : '1')};
 `;
 
-export const Progress = styled.div`
+export const Progress = styled.div<{ empty: boolean }>`
+  opacity: ${props => (props.empty ? '0.5' : '1')};
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -105,6 +104,7 @@ export const Buttons = styled.div`
 
     &:disabled {
       cursor: default;
+      opacity: 0.5;
     }
 
     &:not(.playButton) {

@@ -2,7 +2,6 @@ import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
-import { useContext } from 'react';
 
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
@@ -11,7 +10,7 @@ import api from 'services/api';
 import { convertDurationToTimeString } from 'utils';
 import * as S from 'pagesStyles/home.styles';
 import { Episode } from '@types';
-import { PlayerContext } from 'contexts/Player.context';
+import { usePlayerContext } from 'contexts/Player.context';
 
 type HomeProps = {
   latestEpisodes: Episode[];
@@ -19,7 +18,7 @@ type HomeProps = {
 };
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const { playList } = useContext(PlayerContext);
+  const { playList } = usePlayerContext();
   const episodeList = [...latestEpisodes, ...allEpisodes];
 
   return (
