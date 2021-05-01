@@ -18,6 +18,9 @@ export default function Player() {
     isLooping,
     toggleLoop,
 
+    isShuffling,
+    toggleShuffle,
+
     playNextEpisode,
     playPreviousEpisode,
     hasNext,
@@ -84,7 +87,12 @@ export default function Player() {
         )}
 
         <S.Buttons>
-          <button type='button' disabled={!episode || episodeList.length === 1}>
+          <button
+            type='button'
+            disabled={!episode || episodeList.length === 1}
+            onClick={toggleShuffle}
+            className={isShuffling ? 'isActive' : ''}
+          >
             <img src='/images/shuffle.svg' alt='Embaralhar' />
           </button>
 
@@ -106,7 +114,7 @@ export default function Player() {
 
           <button
             type='button'
-            disabled={!episode || episodeList.length === 1}
+            disabled={!episode}
             onClick={toggleLoop}
             className={isLooping ? 'isActive' : ''}
           >
