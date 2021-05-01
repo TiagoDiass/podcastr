@@ -1,9 +1,10 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 import { PlayerContext } from 'contexts/Player.context';
+import { convertDurationToTimeString } from 'utils';
 import * as S from './Player.styles';
 
 export default function Player() {
@@ -25,9 +26,34 @@ export default function Player() {
     playPreviousEpisode,
     hasNext,
     hasPrevious,
+
+    clearPlayerState,
   } = useContext(PlayerContext);
+
   const episode = episodeList[currentEpisodeIndex];
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  function setupProgressListener() {
+    audioRef.current.currentTime = 0;
+
+    audioRef.current.addEventListener('timeupdate', () => {
+      setProgress(Math.floor(audioRef.current.currentTime));
+    });
+  }
+
+  function handleEpisodedEndend() {
+    if (hasNext) {
+      playNextEpisode();
+    } else {
+      clearPlayerState();
+    }
+  }
+
+  function handleSeek(amount: number) {
+    audioRef.current.currentTime = amount;
+    setProgress(amount);
+  }
 
   useEffect(() => {
     if (!audioRef.current) return;
@@ -60,19 +86,22 @@ export default function Player() {
 
       <S.Footer>
         <S.Progress empty={!episode}>
-          <span>00:00</span>
+          <span>{convertDurationToTimeString(progress)}</span>
           <div className='slider'>
             {episode ? (
               <Slider
                 trackStyle={{ backgroundColor: '#04d361' }}
                 railStyle={{ background: '#9f75ff' }}
                 handleStyle={{ borderColor: '#04d361', borderWidth: 4 }}
+                max={episode.duration}
+                value={progress}
+                onChange={handleSeek}
               />
             ) : (
               <div className='emptySlider' />
             )}
           </div>
-          <span>00:00</span>
+          <span>{convertDurationToTimeString(episode?.duration ?? 0)}</span>
         </S.Progress>
 
         {episode && (
@@ -83,6 +112,8 @@ export default function Player() {
             loop={isLooping}
             onPlay={() => setPlayingState(true)}
             onPause={() => setPlayingState(false)}
+            onEnded={handleEpisodedEndend}
+            onLoadedMetadata={setupProgressListener}
           />
         )}
 

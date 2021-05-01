@@ -10,3 +10,4 @@
 #### To do
 
 - [ ] Tests
+- [ ] Ensure that shuffling is disabled when app plays a single episode
