@@ -23,6 +23,14 @@ export default function EpisodePage({ episode }: EpisodeProps) {
     <>
       <Head>
         <title>{episode.title} | Podcastr</title>
+
+        <meta property='og:image' content={episode.thumbnail} />
+
+        <meta name='description' content={episode.description} />
+
+        <meta property='og:title' content={episode.title} />
+
+        <meta property='og:description' content={episode.description} />
       </Head>
 
       <S.EpisodeContainer>

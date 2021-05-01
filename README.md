@@ -10,7 +10,7 @@
 #### To do
 
 - [ ] Tests
-- [ ] Meta tags for episodes pages
+- [x] Meta tags for episodes pages
 - [ ] Add title to buttons
 - [ ] Ensure that shuffling is disabled when app plays a single episode
 - [ ] Responsive styles?
