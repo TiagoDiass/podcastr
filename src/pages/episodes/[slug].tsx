@@ -57,7 +57,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await api.get('/episodes');
 
   return {
-    paths: [],
+    paths: data.map(episode => {
+      return {
+        params: {
+          slug: episode.id,
+        },
+      };
+    }),
+
     fallback: 'blocking',
   };
 };
