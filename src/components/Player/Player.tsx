@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-import PlayerContext from 'contexts/Player.context';
+import { PlayerContext } from 'contexts/Player.context';
 import * as S from './Player.styles';
 
 export default function Player() {

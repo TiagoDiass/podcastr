@@ -11,7 +11,7 @@ import api from 'services/api';
 import { convertDurationToTimeString } from 'utils';
 import * as S from 'pagesStyles/home.styles';
 import { Episode } from '@types';
-import PlayerContext from 'contexts/Player.context';
+import { PlayerContext } from 'contexts/Player.context';
 
 type HomeProps = {
   latestEpisodes: Episode[];
