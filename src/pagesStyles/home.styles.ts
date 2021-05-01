@@ -4,6 +4,16 @@ export const HomeContainer = styled.div`
   padding: 0 2rem;
   height: calc(100vh - 6.5rem);
   overflow-y: scroll;
+
+  /* Scroll width */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  /* Scroll Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--gray-200);
+  }
 `;
 
 export const Heading = styled.h2`
