@@ -19,7 +19,8 @@ type HomeProps = {
 };
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const { play } = useContext(PlayerContext);
+  const { playList } = useContext(PlayerContext);
+  const episodeList = [...latestEpisodes, ...allEpisodes];
 
   return (
     <>
@@ -31,7 +32,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
           <S.Heading>Últimos lançamentos</S.Heading>
 
           <ul>
-            {latestEpisodes.map(episode => (
+            {latestEpisodes.map((episode, index) => (
               <li key={episode.id}>
                 <div className='imageWrapper' style={{ width: 68 }}>
                   <Image
@@ -52,7 +53,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <time>{episode.durationString}</time>
                 </div>
 
-                <button type='button' onClick={() => play(episode)}>
+                <button type='button' onClick={() => playList(episodeList, index)}>
                   <img src='/images/play-green.svg' alt='Tocar episódio' />
                 </button>
               </li>
@@ -76,7 +77,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
             </thead>
 
             <tbody>
-              {allEpisodes.map(episode => (
+              {allEpisodes.map((episode, index) => (
                 <tr key={episode.id}>
                   <td style={{ width: 72 }}>
                     <Image
@@ -101,7 +102,10 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <td>{episode.durationString}</td>
 
                   <td>
-                    <button type='button' onClick={() => play(episode)}>
+                    <button
+                      type='button'
+                      onClick={() => playList(episodeList, index + latestEpisodes.length)}
+                    >
                       <img src='/images/play-green.svg' alt='Tocar episódio' />
                     </button>
                   </td>
