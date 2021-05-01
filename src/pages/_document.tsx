@@ -39,19 +39,22 @@ export default class MyDocument extends Document {
 
           <link rel='icon' href='/favicon.png' type='image/png' />
 
-          {/* <meta property='og:image' content='/thumbnaill.png' /> */}
+          <meta property='og:image' content='/thumbnaill.png' />
 
-          {/* <meta
+          <meta
             name='description'
-            content='Photosnap | The best platform for photographers and visual storytellers!'
+            content='Podcastr | Os melhores podcasts de tecnologia para você ouvir!'
           />
 
-          <meta property='og:title' content='Photosnap | Tell people your photo stories' />
+          <meta
+            property='og:title'
+            content='Podcastr | Os melhores podcasts de tecnologia para você ouvir!'
+          />
 
           <meta
             property='og:description'
-            content='Photosnap is a platform for photographers and visual storytellers. We make it easy to share photos, tell stories and connect with others.'
-          /> */}
+            content='Podcastr é um website onde você pode ouvir os melhores e mais diversos podcasts sobre tecnologia.'
+          />
         </Head>
         <body>
           <Main />
