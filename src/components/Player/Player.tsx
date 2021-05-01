@@ -120,6 +120,7 @@ export default function Player() {
         <S.Buttons>
           <button
             type='button'
+            title='Embaralhar'
             disabled={!episode || episodeList.length === 1}
             onClick={toggleShuffle}
             className={isShuffling ? 'isActive' : ''}
@@ -127,11 +128,22 @@ export default function Player() {
             <img src='/images/shuffle.svg' alt='Embaralhar' />
           </button>
 
-          <button type='button' disabled={!episode || !hasPrevious} onClick={playPreviousEpisode}>
+          <button
+            type='button'
+            title='Tocar anterior'
+            disabled={!episode || !hasPrevious}
+            onClick={playPreviousEpisode}
+          >
             <img src='/images/play-previous.svg' alt='Tocar anterior' />
           </button>
 
-          <button type='button' className='playButton' disabled={!episode} onClick={togglePlay}>
+          <button
+            type='button'
+            title={isPlaying ? 'Pausar' : 'Tocar'}
+            className='playButton'
+            disabled={!episode}
+            onClick={togglePlay}
+          >
             {isPlaying ? (
               <img src='/images/pause.svg' alt='Pausar' />
             ) : (
@@ -139,12 +151,18 @@ export default function Player() {
             )}
           </button>
 
-          <button type='button' disabled={!episode || !hasNext} onClick={playNextEpisode}>
+          <button
+            type='button'
+            title='Tocar próxima'
+            disabled={!episode || !hasNext}
+            onClick={playNextEpisode}
+          >
             <img src='/images/play-next.svg' alt='Tocar próxima' />
           </button>
 
           <button
             type='button'
+            title='Repetir'
             disabled={!episode}
             onClick={toggleLoop}
             className={isLooping ? 'isActive' : ''}

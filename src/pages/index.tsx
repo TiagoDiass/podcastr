@@ -52,7 +52,11 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <time>{episode.durationString}</time>
                 </div>
 
-                <button type='button' onClick={() => playList(episodeList, index)}>
+                <button
+                  type='button'
+                  onClick={() => playList(episodeList, index)}
+                  title='Tocar episódio'
+                >
                   <img src='/images/play-green.svg' alt='Tocar episódio' />
                 </button>
               </li>
@@ -104,6 +108,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                     <button
                       type='button'
                       onClick={() => playList(episodeList, index + latestEpisodes.length)}
+                      title='Tocar episódio'
                     >
                       <img src='/images/play-green.svg' alt='Tocar episódio' />
                     </button>

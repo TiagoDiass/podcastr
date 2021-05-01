@@ -36,14 +36,14 @@ export default function EpisodePage({ episode }: EpisodeProps) {
       <S.EpisodeContainer>
         <S.ThumbnailContainer>
           <Link href='/'>
-            <button type='button'>
+            <button type='button' title='Voltar'>
               <img src='/images/arrow-left.svg' alt='Voltar' />
             </button>
           </Link>
 
           <Image src={episode.thumbnail} width={700} height={160} objectFit='cover' />
 
-          <button type='button' onClick={() => play(episode)}>
+          <button type='button' onClick={() => play(episode)} title='Tocar episódio'>
             <img src='/images/play.svg' alt='Tocar episódio' />
           </button>
         </S.ThumbnailContainer>
