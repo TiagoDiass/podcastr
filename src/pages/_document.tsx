@@ -37,8 +37,6 @@ export default class MyDocument extends Document {
             rel='stylesheet'
           />
 
-          <title>Podcastr</title>
-
           <link rel='icon' href='/favicon.png' type='image/png' />
 
           {/* <meta property='og:image' content='/thumbnaill.png' /> */}

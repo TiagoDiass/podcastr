@@ -1,6 +1,7 @@
 import { Header, Player } from 'components';
 import GlobalStyles from 'styles/global';
 import styled from 'styled-components';
+import Head from 'next/head';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -11,14 +12,19 @@ const AppWrapper = styled.div`
 
 export default function App({ Component, pageProps }) {
   return (
-    <AppWrapper>
-      <GlobalStyles />
-      <main>
-        <Header />
-        <Component {...pageProps} />
-      </main>
+    <>
+      <Head>
+        <title>Podcaster</title>
+      </Head>
+      <AppWrapper>
+        <GlobalStyles />
+        <main>
+          <Header />
+          <Component {...pageProps} />
+        </main>
 
-      <Player />
-    </AppWrapper>
+        <Player />
+      </AppWrapper>
+    </>
   );
 }

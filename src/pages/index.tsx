@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import Head from 'next/head';
 
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
@@ -27,91 +28,96 @@ type HomeProps = {
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   return (
-    <S.HomeContainer>
-      <S.LatestEpisodes>
-        <S.Heading>Últimos lançamentos</S.Heading>
+    <>
+      <Head>
+        <title>Podcastr | Home</title>
+      </Head>
+      <S.HomeContainer>
+        <S.LatestEpisodes>
+          <S.Heading>Últimos lançamentos</S.Heading>
 
-        <ul>
-          {latestEpisodes.map(episode => (
-            <li key={episode.id}>
-              <div className='imageWrapper' style={{ width: 68 }}>
-                <Image
-                  width={192}
-                  height={192}
-                  objectFit='cover'
-                  src={episode.thumbnail}
-                  alt={episode.title}
-                />
-              </div>
-
-              <div className='episodeDetails'>
-                <Link href={`/episodes/${episode.id}`}>
-                  <a>{episode.title}</a>
-                </Link>
-                <p>{episode.members}</p>
-                <span>{episode.publishedAt}</span>
-                <time>{episode.durationString}</time>
-              </div>
-
-              <button type='button'>
-                <img src='/images/play-green.svg' alt='Tocar episódio' />
-              </button>
-            </li>
-          ))}
-        </ul>
-      </S.LatestEpisodes>
-
-      <S.AllEpisodes>
-        <h2>Todos episódios</h2>
-
-        <table cellSpacing={0}>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Podcast</th>
-              <th>Integrantes</th>
-              <th>Data</th>
-              <th>Duração</th>
-              <th></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {allEpisodes.map(episode => (
-              <tr key={episode.id}>
-                <td style={{ width: 72 }}>
+          <ul>
+            {latestEpisodes.map(episode => (
+              <li key={episode.id}>
+                <div className='imageWrapper' style={{ width: 68 }}>
                   <Image
-                    width={120}
-                    height={120}
+                    width={192}
+                    height={192}
                     objectFit='cover'
                     src={episode.thumbnail}
                     alt={episode.title}
                   />
-                </td>
+                </div>
 
-                <td>
+                <div className='episodeDetails'>
                   <Link href={`/episodes/${episode.id}`}>
                     <a>{episode.title}</a>
                   </Link>
-                </td>
+                  <p>{episode.members}</p>
+                  <span>{episode.publishedAt}</span>
+                  <time>{episode.durationString}</time>
+                </div>
 
-                <td>{episode.members}</td>
-
-                <td style={{ width: 100 }}>{episode.publishedAt}</td>
-
-                <td>{episode.durationString}</td>
-
-                <td>
-                  <button type='button'>
-                    <img src='/images/play-green.svg' alt='Tocar episódio' />
-                  </button>
-                </td>
-              </tr>
+                <button type='button'>
+                  <img src='/images/play-green.svg' alt='Tocar episódio' />
+                </button>
+              </li>
             ))}
-          </tbody>
-        </table>
-      </S.AllEpisodes>
-    </S.HomeContainer>
+          </ul>
+        </S.LatestEpisodes>
+
+        <S.AllEpisodes>
+          <h2>Todos episódios</h2>
+
+          <table cellSpacing={0}>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Podcast</th>
+                <th>Integrantes</th>
+                <th>Data</th>
+                <th>Duração</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {allEpisodes.map(episode => (
+                <tr key={episode.id}>
+                  <td style={{ width: 72 }}>
+                    <Image
+                      width={120}
+                      height={120}
+                      objectFit='cover'
+                      src={episode.thumbnail}
+                      alt={episode.title}
+                    />
+                  </td>
+
+                  <td>
+                    <Link href={`/episodes/${episode.id}`}>
+                      <a>{episode.title}</a>
+                    </Link>
+                  </td>
+
+                  <td>{episode.members}</td>
+
+                  <td style={{ width: 100 }}>{episode.publishedAt}</td>
+
+                  <td>{episode.durationString}</td>
+
+                  <td>
+                    <button type='button'>
+                      <img src='/images/play-green.svg' alt='Tocar episódio' />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </S.AllEpisodes>
+      </S.HomeContainer>
+    </>
   );
 }
 
