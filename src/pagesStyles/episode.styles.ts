@@ -18,7 +18,7 @@ export const ThumbnailContainer = styled.div`
 
   button {
     position: absolute;
-    top: calc(50% - 1.5rem);
+    top: 50%;
     z-index: 2;
     font-size: 0;
     width: 1.5rem;
@@ -35,13 +35,15 @@ export const ThumbnailContainer = styled.div`
     transition: filter 0.25s ease;
 
     &:first-of-type {
-      left: -1.5rem;
+      left: 0;
       background-color: var(--purple-400);
+      transform: translate(-50%, -50%);
     }
 
     &:last-of-type {
-      right: -1.5rem;
+      right: 0;
       background-color: var(--green-500);
+      transform: translate(50%, -50%);
     }
 
     &:hover {

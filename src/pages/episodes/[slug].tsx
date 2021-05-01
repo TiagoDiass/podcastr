@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import api from 'services/api';
 import { convertDurationToTimeString } from 'utils';
@@ -34,9 +35,11 @@ export default function Episode({ episode }: EpisodeProps) {
 
       <S.EpisodeContainer>
         <S.ThumbnailContainer>
-          <button type='button'>
-            <img src='/images/arrow-left.svg' alt='Voltar' />
-          </button>
+          <Link href='/'>
+            <button type='button'>
+              <img src='/images/arrow-left.svg' alt='Voltar' />
+            </button>
+          </Link>
 
           <Image src={episode.thumbnail} width={700} height={160} objectFit='cover' />
 
