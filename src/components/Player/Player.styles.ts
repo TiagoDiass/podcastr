@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const PlayerContainer = styled.aside`
   width: 26.5rem;
@@ -37,6 +37,28 @@ export const EmptyPlayer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const PlayingEpisode = styled.div`
+  text-align: center;
+
+  img {
+    border-radius: 1.5rem;
+  }
+
+  strong {
+    display: block;
+    margin-top: 2rem;
+    font: 600 1.25rem Lexend, sans-serif;
+    line-height: 1.75rem;
+  }
+
+  span {
+    display: block;
+    margin-top: 1rem;
+    opacity: 0.6;
+    line-height: 1.5rem;
+  }
 `;
 
 export const Footer = styled.footer<{ empty: boolean }>`
@@ -81,13 +103,17 @@ export const Buttons = styled.div`
     font-size: 0;
     transition: all 0.15s ease;
 
+    &:disabled {
+      cursor: default;
+    }
+
     &:not(.playButton) {
       background: transparent;
       border-radius: 0.4rem;
       width: 2.5rem;
       height: 2.5rem;
 
-      &:hover {
+      &:hover:not(:disabled) {
         background: rgba(255, 255, 255, 0.1);
       }
     }
@@ -98,7 +124,7 @@ export const Buttons = styled.div`
       border-radius: 1rem;
       background: var(--purple-300);
 
-      &:hover {
+      &:hover:not(:disabled) {
         filter: brightness(0.97);
       }
     }
