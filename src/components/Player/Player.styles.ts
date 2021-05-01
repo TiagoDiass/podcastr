@@ -102,6 +102,10 @@ export const Buttons = styled.div`
     font-size: 0;
     transition: all 0.15s ease;
 
+    &.isActive {
+      filter: invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+    }
+
     &:disabled {
       cursor: default;
       opacity: 0.5;

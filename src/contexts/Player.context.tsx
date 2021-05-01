@@ -4,10 +4,15 @@ import { createContext, ReactNode, useContext, useState } from 'react';
 type PlayerContextData = {
   episodeList: Episode[];
   currentEpisodeIndex: number;
+
   isPlaying: boolean;
   play: (episode: Episode) => void;
   togglePlay: () => void;
   setPlayingState: (state: boolean) => void;
+
+  isLooping: boolean;
+  toggleLoop: () => void;
+
   playList: (list: Episode[], index: number) => void;
   playNextEpisode: () => void;
   playPreviousEpisode: () => void;
@@ -25,6 +30,7 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps) 
   const [episodeList, setEpisodeList] = useState([]);
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLooping, setIsLooping] = useState(false);
 
   // function that will be called on the episode page because there is only one episode
   function play(episode: Episode) {
@@ -42,6 +48,10 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps) 
 
   function togglePlay() {
     setIsPlaying(!isPlaying);
+  }
+
+  function toggleLoop() {
+    setIsLooping(!isLooping);
   }
 
   function setPlayingState(state: boolean) {
@@ -70,10 +80,15 @@ export function PlayerContextProvider({ children }: PlayerContextProviderProps) 
       value={{
         episodeList,
         currentEpisodeIndex,
+
         isPlaying,
         play,
         togglePlay,
         setPlayingState,
+
+        isLooping,
+        toggleLoop,
+
         playList,
         playNextEpisode,
         playPreviousEpisode,
