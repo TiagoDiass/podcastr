@@ -128,9 +128,6 @@ describe('Player component', () => {
           description: `Descrição do podcast 1`,
         }),
       ],
-
-      hasNext: false,
-      hasPrevious: false,
     };
 
     render(
@@ -140,6 +137,27 @@ describe('Player component', () => {
     );
 
     expect(screen.getByRole('button', { name: /embaralhar/i })).toBeDisabled();
+  });
+
+  it('should enable the shuffle button if there is more than one episode', () => {
+    const mockContextValue: PlayerContextData = {
+      ...baseMockContext,
+      episodeList: [1, 2].map(i =>
+        createEpisode({
+          id: `podcast-${i}`,
+          title: `Podcast ${i}`,
+          description: `Descrição do podcast ${i}`,
+        })
+      ),
+    };
+
+    render(
+      <PlayerContext.Provider value={mockContextValue}>
+        <Player />
+      </PlayerContext.Provider>
+    );
+
+    expect(screen.getByRole('button', { name: /embaralhar/i })).toBeEnabled();
   });
 
   it('should disable the playNext button if there is no episode after the current', () => {
