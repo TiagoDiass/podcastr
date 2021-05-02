@@ -208,6 +208,29 @@ describe('Player component', () => {
 
       expect(screen.getByRole('button', { name: /tocar anterior/i })).toBeEnabled();
     });
+
+    it('should call playPreviousEpisode from context when user clicks on the playPrevious button', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [
+          createEpisode({
+            id: `podcast-1`,
+            title: `Podcast 1`,
+            description: `Descrição do podcast 1`,
+          }),
+        ],
+        hasPrevious: true,
+      };
+
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
+
+      userEvent.click(screen.getByRole('button', { name: /tocar anterior/i }));
+      expect(mockContextValue.playPreviousEpisode).toHaveBeenCalled();
+    });
   });
 
   describe('PlayNext button', () => {
