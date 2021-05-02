@@ -182,6 +182,28 @@ describe('Player component', () => {
     expect(screen.getByRole('button', { name: /tocar anterior/i })).toBeDisabled();
   });
 
+  it('should enable the playPrevious button if there is an episode before the current', () => {
+    const mockContextValue: PlayerContextData = {
+      ...baseMockContext,
+      episodeList: [
+        createEpisode({
+          id: `podcast-1`,
+          title: `Podcast 1`,
+          description: `Descrição do podcast 1`,
+        }),
+      ],
+      hasPrevious: true,
+    };
+
+    render(
+      <PlayerContext.Provider value={mockContextValue}>
+        <Player />
+      </PlayerContext.Provider>
+    );
+
+    expect(screen.getByRole('button', { name: /tocar anterior/i })).toBeEnabled();
+  });
+
   it('should disable the playNext button if there is no episode after the current', () => {
     const mockContextValue: PlayerContextData = {
       ...baseMockContext,
