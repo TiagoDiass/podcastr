@@ -162,6 +162,28 @@ describe('Player component', () => {
 
       expect(screen.getByRole('button', { name: /embaralhar/i })).toBeEnabled();
     });
+
+    it('should call toggleShuffle from context if user clicks on shuffle button', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [1, 2].map(i =>
+          createEpisode({
+            id: `podcast-${i}`,
+            title: `Podcast ${i}`,
+            description: `Descrição do podcast ${i}`,
+          })
+        ),
+      };
+
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
+
+      userEvent.click(screen.getByRole('button', { name: /embaralhar/i }));
+      expect(mockContextValue.toggleShuffle).toHaveBeenCalled();
+    });
   });
 
   describe('PlayPrevious button', () => {
