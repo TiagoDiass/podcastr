@@ -9,10 +9,10 @@
 
 #### To do
 
-- [ ] Tests
+- [x] Tests
 - [x] Meta tags for episodes pages
 - [x] Add title to buttons
-- [ ] Ensure that shuffling is disabled when app plays a single episode
+- [x] Ensure that shuffling is disabled when app plays a single episode
 - [ ] Responsive styles?
 - [ ] PWA
 - [ ] Dark theme
