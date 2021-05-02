@@ -118,6 +118,30 @@ describe('Player component', () => {
     expect(HTMLAudioElement.prototype.pause).toHaveBeenCalled();
   });
 
+  it('should disable the shuffle button if there is only one episode', () => {
+    const mockContextValue: PlayerContextData = {
+      ...baseMockContext,
+      episodeList: [
+        createEpisode({
+          id: `podcast-1`,
+          title: `Podcast 1`,
+          description: `Descrição do podcast 1`,
+        }),
+      ],
+
+      hasNext: false,
+      hasPrevious: false,
+    };
+
+    render(
+      <PlayerContext.Provider value={mockContextValue}>
+        <Player />
+      </PlayerContext.Provider>
+    );
+
+    expect(screen.getByRole('button', { name: /embaralhar/i })).toBeDisabled();
+  });
+
   it('should disable the playNext button if there is no episode after the current', () => {
     const mockContextValue: PlayerContextData = {
       ...baseMockContext,
