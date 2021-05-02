@@ -4,7 +4,11 @@ import Link from 'next/link';
 import { Logo } from 'components';
 import * as S from './Header.styles';
 
-export default function Header() {
+type HeaderProps = {
+  onChangeTheme: () => void;
+};
+
+export default function Header({ onChangeTheme }: HeaderProps) {
   const currentDate = format(new Date(), 'EEEEEE, d MMMM', { locale: ptBR });
 
   return (
@@ -18,6 +22,8 @@ export default function Header() {
       <S.Slogan>O melhor para você ouvir, sempre.</S.Slogan>
 
       <S.Date data-testid='current-date'>{currentDate}</S.Date>
+
+      {/* <S.ThemeChangeButton onClick={onChangeTheme}>Mudar tema</S.ThemeChangeButton> */}
     </S.HeaderContainer>
   );
 }

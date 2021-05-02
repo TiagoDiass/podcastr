@@ -17,5 +17,21 @@ export const Slogan = styled.p`
 
 export const Date = styled.time`
   margin-left: auto;
+  /* margin-right: 1.5rem; */
   text-transform: capitalize;
+`;
+
+export const ThemeChangeButton = styled.button`
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border-radius: 0.5rem;
+  border: 1px solid var(--gray-500);
+  color: var(--gray-500);
+
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--gray-500);
+    color: var(--white);
+  }
 `;

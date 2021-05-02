@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const PlayerContainer = styled.aside`
   width: 26.5rem;
@@ -6,7 +6,7 @@ export const PlayerContainer = styled.aside`
   padding: 3rem 3.5rem;
 
   background: var(--purple-500);
-  color: var(--white);
+  color: #fff;;
   display: flex;
   flex-direction: column;
   align-items: center;
