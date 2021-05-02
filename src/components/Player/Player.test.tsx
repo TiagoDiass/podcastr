@@ -62,14 +62,12 @@ describe('Player component', () => {
     );
 
     expect(screen.getByText(/selecione um podcast para ouvir/i)).toBeInTheDocument();
-    const buttons = screen.getAllByRole('button');
-
-    expect(buttons).toHaveLength(5);
-    expect(buttons[0]).toBeDisabled(); // shuffle
-    expect(buttons[1]).toBeDisabled(); // previous
-    expect(buttons[2]).toBeDisabled(); // play
-    expect(buttons[3]).toBeDisabled(); // next
-    expect(buttons[4]).toBeDisabled(); // repeat
+    expect(screen.getAllByRole('button')).toHaveLength(5);
+    expect(screen.getByRole('button', { name: /embaralhar/i })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /tocar anterior/i })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Tocar' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /tocar próxima/i })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /repetir/i })).toBeDisabled();
   });
 
   it('should show a pause button and call togglePlay when user clicks on it', () => {
@@ -118,5 +116,32 @@ describe('Player component', () => {
     userEvent.click(screen.getByAltText('Tocar'));
     expect(mockContextValue.togglePlay).toHaveBeenCalled();
     expect(HTMLAudioElement.prototype.pause).toHaveBeenCalled();
+  });
+
+  it('should disable the playNext button if there is no episode after the current', () => {
+    const mockContextValue: PlayerContextData = {
+      ...baseMockContext,
+      episodeList: [1, 2].map(i =>
+        createEpisode({
+          id: `podcast-${i}`,
+          title: `Podcast ${i}`,
+          description: `Descrição do podcast ${i}`,
+        })
+      ),
+      hasNext: false,
+      hasPrevious: true,
+    };
+
+    render(
+      <PlayerContext.Provider value={mockContextValue}>
+        <Player />
+      </PlayerContext.Provider>
+    );
+
+    expect(screen.getByRole('button', { name: /tocar próxima/i })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /embaralhar/i })).toBeEnabled();
+    expect(screen.getByRole('button', { name: /tocar anterior/i })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'Tocar' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: /repetir/i })).toBeEnabled();
   });
 });
