@@ -7,7 +7,8 @@
     "start": "next start",
     "server": "json-server server.json -w -d 750 -p 3333",
     "test": "jest",
-    "test:watch": "yarn test --watch"
+    "test:watch": "yarn test --watch",
+    "test:cypress": "cypress open"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -28,6 +29,7 @@
     "@types/react": "^17.0.4",
     "@types/styled-components": "^5.1.9",
     "babel-plugin-styled-components": "^1.12.0",
+    "cypress": "^7.2.0",
     "git-commit-msg-linter": "^3.1.0",
     "jest": "^26.6.3",
     "json-server": "^0.16.3",
