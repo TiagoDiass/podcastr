@@ -39,7 +39,7 @@ export default class MyDocument extends Document {
 
           <link rel='icon' href='/favicon.png' type='image/png' />
 
-          <meta property='og:image' content='/thumbnaill.png' />
+          <meta property='og:image' content='/thumbnail.png' />
 
           <meta
             name='description'
