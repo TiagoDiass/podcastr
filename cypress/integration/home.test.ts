@@ -4,5 +4,7 @@ describe('Home page', () => {
     cy.visit('/');
   });
 
-  it('should go the home', () => {});
+  it('should go the home', () => {
+    cy.findByRole('img', { name: /podcastr/i }).should('exist');
+  });
 });
