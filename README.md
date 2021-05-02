@@ -16,3 +16,8 @@
 - [ ] Responsive styles?
 - [ ] PWA
 - [ ] Dark theme
+
+#### Ideas
+
+- Add favorites podcasts list
+- Add to check later
