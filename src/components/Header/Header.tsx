@@ -5,10 +5,10 @@ import { Logo } from 'components';
 import * as S from './Header.styles';
 
 type HeaderProps = {
-  onChangeTheme: () => void;
+  onThemeChange: () => void;
 };
 
-export default function Header({ onChangeTheme }: HeaderProps) {
+export default function Header({ onThemeChange }: HeaderProps) {
   const currentDate = format(new Date(), 'EEEEEE, d MMMM', { locale: ptBR });
 
   return (

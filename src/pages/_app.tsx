@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }) {
           <AppWrapper>
             <GlobalStyles />
             <main>
-              <Header onChangeTheme={changeTheme} />
+              <Header onThemeChange={changeTheme} />
               <Component {...pageProps} />
             </main>
 
