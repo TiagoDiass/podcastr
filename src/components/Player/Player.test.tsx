@@ -70,159 +70,189 @@ describe('Player component', () => {
     expect(screen.getByRole('button', { name: /repetir/i })).toBeDisabled();
   });
 
-  it('should show a pause button and call togglePlay when user clicks on it', () => {
-    const mockContextValue: PlayerContextData = {
-      ...baseMockContext,
-      episodeList: [
-        createEpisode({
-          id: 'podcast-1',
-          title: 'Podcast 1',
-          description: 'Descrição do podcast 1',
-        }),
-      ],
-      isPlaying: true,
-    };
+  describe('Play / Pause button', () => {
+    it('should show a pause button and call togglePlay when user clicks on it', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [
+          createEpisode({
+            id: 'podcast-1',
+            title: 'Podcast 1',
+            description: 'Descrição do podcast 1',
+          }),
+        ],
+        isPlaying: true,
+      };
 
-    render(
-      <PlayerContext.Provider value={mockContextValue}>
-        <Player />
-      </PlayerContext.Provider>
-    );
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
 
-    userEvent.click(screen.getByAltText(/pausar/i));
-    expect(mockContextValue.togglePlay).toHaveBeenCalled();
-    expect(HTMLAudioElement.prototype.play).toHaveBeenCalled();
+      userEvent.click(screen.getByAltText(/pausar/i));
+      expect(mockContextValue.togglePlay).toHaveBeenCalled();
+      expect(HTMLAudioElement.prototype.play).toHaveBeenCalled();
+    });
+
+    it('should show a play button and call togglePlay when user clicks on it', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [
+          createEpisode({
+            id: 'podcast-1',
+            title: 'Podcast 1',
+            description: 'Descrição do podcast 1',
+          }),
+        ],
+        isPlaying: false,
+      };
+
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
+
+      userEvent.click(screen.getByAltText('Tocar'));
+      expect(mockContextValue.togglePlay).toHaveBeenCalled();
+      expect(HTMLAudioElement.prototype.pause).toHaveBeenCalled();
+    });
   });
 
-  it('should show a play button and call togglePlay when user clicks on it', () => {
-    const mockContextValue: PlayerContextData = {
-      ...baseMockContext,
-      episodeList: [
-        createEpisode({
-          id: 'podcast-1',
-          title: 'Podcast 1',
-          description: 'Descrição do podcast 1',
-        }),
-      ],
-      isPlaying: false,
-    };
+  describe('Shuffle button', () => {
+    it('should disable the shuffle button if there is only one episode', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [
+          createEpisode({
+            id: `podcast-1`,
+            title: `Podcast 1`,
+            description: `Descrição do podcast 1`,
+          }),
+        ],
+      };
 
-    render(
-      <PlayerContext.Provider value={mockContextValue}>
-        <Player />
-      </PlayerContext.Provider>
-    );
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
 
-    userEvent.click(screen.getByAltText('Tocar'));
-    expect(mockContextValue.togglePlay).toHaveBeenCalled();
-    expect(HTMLAudioElement.prototype.pause).toHaveBeenCalled();
+      expect(screen.getByRole('button', { name: /embaralhar/i })).toBeDisabled();
+    });
+
+    it('should enable the shuffle button if there is more than one episode', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [1, 2].map(i =>
+          createEpisode({
+            id: `podcast-${i}`,
+            title: `Podcast ${i}`,
+            description: `Descrição do podcast ${i}`,
+          })
+        ),
+      };
+
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
+
+      expect(screen.getByRole('button', { name: /embaralhar/i })).toBeEnabled();
+    });
   });
 
-  it('should disable the shuffle button if there is only one episode', () => {
-    const mockContextValue: PlayerContextData = {
-      ...baseMockContext,
-      episodeList: [
-        createEpisode({
-          id: `podcast-1`,
-          title: `Podcast 1`,
-          description: `Descrição do podcast 1`,
-        }),
-      ],
-    };
+  describe('PlayPrevious button', () => {
+    it('should disable the playPrevious button if there is no episode before the current', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [
+          createEpisode({
+            id: `podcast-1`,
+            title: `Podcast 1`,
+            description: `Descrição do podcast 1`,
+          }),
+        ],
+        hasPrevious: false,
+      };
 
-    render(
-      <PlayerContext.Provider value={mockContextValue}>
-        <Player />
-      </PlayerContext.Provider>
-    );
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
 
-    expect(screen.getByRole('button', { name: /embaralhar/i })).toBeDisabled();
+      expect(screen.getByRole('button', { name: /tocar anterior/i })).toBeDisabled();
+    });
+
+    it('should enable the playPrevious button if there is an episode before the current', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [
+          createEpisode({
+            id: `podcast-1`,
+            title: `Podcast 1`,
+            description: `Descrição do podcast 1`,
+          }),
+        ],
+        hasPrevious: true,
+      };
+
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
+
+      expect(screen.getByRole('button', { name: /tocar anterior/i })).toBeEnabled();
+    });
   });
 
-  it('should enable the shuffle button if there is more than one episode', () => {
-    const mockContextValue: PlayerContextData = {
-      ...baseMockContext,
-      episodeList: [1, 2].map(i =>
-        createEpisode({
-          id: `podcast-${i}`,
-          title: `Podcast ${i}`,
-          description: `Descrição do podcast ${i}`,
-        })
-      ),
-    };
+  describe('PlayNext button', () => {
+    it('should disable the playNext button if there is no episode after the current', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [
+          createEpisode({
+            id: `podcast-1`,
+            title: `Podcast 1`,
+            description: `Descrição do podcast 1`,
+          }),
+        ],
+        hasNext: false,
+      };
 
-    render(
-      <PlayerContext.Provider value={mockContextValue}>
-        <Player />
-      </PlayerContext.Provider>
-    );
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
 
-    expect(screen.getByRole('button', { name: /embaralhar/i })).toBeEnabled();
-  });
+      expect(screen.getByRole('button', { name: /tocar próxima/i })).toBeDisabled();
+    });
 
-  it('should disable the playPrevious button if there is no episode before the current', () => {
-    const mockContextValue: PlayerContextData = {
-      ...baseMockContext,
-      episodeList: [
-        createEpisode({
-          id: `podcast-1`,
-          title: `Podcast 1`,
-          description: `Descrição do podcast 1`,
-        }),
-      ],
-      hasPrevious: false,
-    };
+    it('should enable the playNext button if there is an episode after the current', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [
+          createEpisode({
+            id: `podcast-1`,
+            title: `Podcast 1`,
+            description: `Descrição do podcast 1`,
+          }),
+        ],
+        hasNext: true,
+      };
 
-    render(
-      <PlayerContext.Provider value={mockContextValue}>
-        <Player />
-      </PlayerContext.Provider>
-    );
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
 
-    expect(screen.getByRole('button', { name: /tocar anterior/i })).toBeDisabled();
-  });
-
-  it('should enable the playPrevious button if there is an episode before the current', () => {
-    const mockContextValue: PlayerContextData = {
-      ...baseMockContext,
-      episodeList: [
-        createEpisode({
-          id: `podcast-1`,
-          title: `Podcast 1`,
-          description: `Descrição do podcast 1`,
-        }),
-      ],
-      hasPrevious: true,
-    };
-
-    render(
-      <PlayerContext.Provider value={mockContextValue}>
-        <Player />
-      </PlayerContext.Provider>
-    );
-
-    expect(screen.getByRole('button', { name: /tocar anterior/i })).toBeEnabled();
-  });
-
-  it('should disable the playNext button if there is no episode after the current', () => {
-    const mockContextValue: PlayerContextData = {
-      ...baseMockContext,
-      episodeList: [
-        createEpisode({
-          id: `podcast-1`,
-          title: `Podcast 1`,
-          description: `Descrição do podcast 1`,
-        }),
-      ],
-      hasNext: false,
-    };
-
-    render(
-      <PlayerContext.Provider value={mockContextValue}>
-        <Player />
-      </PlayerContext.Provider>
-    );
-
-    expect(screen.getByRole('button', { name: /tocar próxima/i })).toBeDisabled();
+      expect(screen.getByRole('button', { name: /tocar próxima/i })).toBeEnabled();
+    });
   });
 });
