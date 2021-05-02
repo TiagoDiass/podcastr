@@ -323,4 +323,64 @@ describe('Player component', () => {
       expect(mockContextValue.playNextEpisode).toHaveBeenCalled();
     });
   });
+
+  describe('Repeat / Loop button', () => {
+    it('should disable the repeat button if there is no episode', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [],
+      };
+
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
+
+      expect(screen.getByRole('button', { name: /repetir/i })).toBeDisabled();
+    });
+
+    it('should enable the repeat button if there is an episode', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [
+          createEpisode({
+            id: `podcast-1`,
+            title: `Podcast 1`,
+            description: `Descrição do podcast 1`,
+          }),
+        ],
+      };
+
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
+
+      expect(screen.getByRole('button', { name: /repetir/i })).toBeEnabled();
+    });
+
+    it('should call toggleLoop from context if user clicks on the repeat button', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [
+          createEpisode({
+            id: `podcast-1`,
+            title: `Podcast 1`,
+            description: `Descrição do podcast 1`,
+          }),
+        ],
+      };
+
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
+
+      userEvent.click(screen.getByRole('button', { name: /repetir/i }));
+      expect(mockContextValue.toggleLoop).toHaveBeenCalled();
+    });
+  });
 });
