@@ -126,4 +126,32 @@ describe('Home page', () => {
     userEvent.click(episodesItems[0].querySelector('button[title="Tocar episódio"]'));
     expect(mockContextValue.playList).toHaveBeenCalledWith(latestEpisodes, 0);
   });
+
+  it('should call playList from context when user clicks on the play button in one of the all episodes', () => {
+    const allEpisodes = [3, 4, 5, 6].map(i =>
+      createEpisode({
+        id: `podcast-${i}`,
+        title: `Podcast ${i}`,
+        description: `Descrição mockada ${i}`,
+      })
+    );
+
+    const latestEpisodes = [1, 2].map(i =>
+      createEpisode({
+        id: `podcast-${i}`,
+        title: `Podcast ${i}`,
+        description: `Descrição mockada ${i}`,
+      })
+    );
+
+    const allEpisodesList = [...latestEpisodes, ...allEpisodes];
+
+    const { mockContextValue } = makeSut({ allEpisodes, latestEpisodes });
+
+    const episodesTable = screen.getByRole('table');
+    const episodesItems = episodesTable.querySelector('tbody').children;
+
+    userEvent.click(episodesItems[3].querySelector('button[title="Tocar episódio"]'));
+    expect(mockContextValue.playList).toHaveBeenCalledWith(allEpisodesList, 5);
+  });
 });
