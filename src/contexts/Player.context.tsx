@@ -1,7 +1,7 @@
 import { Episode } from '@types';
 import { createContext, ReactNode, useContext, useState } from 'react';
 
-type PlayerContextData = {
+export type PlayerContextData = {
   episodeList: Episode[];
   currentEpisodeIndex: number;
 

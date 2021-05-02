@@ -1,6 +1,9 @@
 jest.mock('next/image', () => () => <></>);
+jest.mock('rc-slider/assets/index.css');
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Episode } from '@types';
+import { PlayerContext, PlayerContextData } from 'contexts/Player.context';
 import Home from 'pages';
 
 type CreateEpisodeParams = {
@@ -18,6 +21,47 @@ const createEpisode = (partialEpisodeData: CreateEpisodeParams): Episode => ({
   duration: 3600,
   durationString: '01:00:00',
 });
+
+type MakeSutParams = {
+  latestEpisodes?: Episode[];
+  allEpisodes?: Episode[];
+};
+
+const makeSut = ({ latestEpisodes = [], allEpisodes = [] }: MakeSutParams) => {
+  const mockContextValue: PlayerContextData = {
+    episodeList: [],
+    currentEpisodeIndex: 0,
+
+    isPlaying: false,
+    play: jest.fn(),
+    togglePlay: jest.fn(),
+    setPlayingState: jest.fn(),
+
+    isLooping: false,
+    toggleLoop: jest.fn(),
+
+    isShuffling: false,
+    toggleShuffle: jest.fn(),
+
+    playList: jest.fn(),
+    playNextEpisode: jest.fn(),
+    playPreviousEpisode: jest.fn(),
+    hasNext: true,
+    hasPrevious: false,
+
+    clearPlayerState: jest.fn(),
+  };
+
+  render(
+    <PlayerContext.Provider value={mockContextValue}>
+      <Home latestEpisodes={latestEpisodes} allEpisodes={allEpisodes} />
+    </PlayerContext.Provider>
+  );
+
+  return {
+    mockContextValue,
+  };
+};
 
 describe('Home page', () => {
   it('should render the latest episodes correctly', () => {
@@ -56,5 +100,30 @@ describe('Home page', () => {
 
     expect(allEpisodesTableElement).toBeInTheDocument();
     expect(allEpisodesTableElement.querySelector('tbody').children).toHaveLength(4);
+  });
+
+  it('should call playList from context when user clicks on the play button in one of the latest episodes', () => {
+    const latestEpisodes = [
+      createEpisode({
+        id: 'podcast-1',
+        title: 'Podcast 1',
+        description: 'Descrição mockada 1',
+      }),
+      createEpisode({
+        id: 'podcast-2',
+        title: 'Podcast 2',
+        description: 'Descrição mockada 2',
+      }),
+    ];
+
+    const { mockContextValue } = makeSut({ latestEpisodes });
+
+    const episodesItems = screen.getAllByRole('listitem');
+
+    userEvent.click(episodesItems[1].querySelector('button[title="Tocar episódio"]'));
+    expect(mockContextValue.playList).toHaveBeenCalledWith(latestEpisodes, 1);
+
+    userEvent.click(episodesItems[0].querySelector('button[title="Tocar episódio"]'));
+    expect(mockContextValue.playList).toHaveBeenCalledWith(latestEpisodes, 0);
   });
 });
