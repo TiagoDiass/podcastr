@@ -277,5 +277,28 @@ describe('Player component', () => {
 
       expect(screen.getByRole('button', { name: /tocar próxima/i })).toBeEnabled();
     });
+
+    it('should call playNextEpisode from context when user clicks on the playNext button', () => {
+      const mockContextValue: PlayerContextData = {
+        ...baseMockContext,
+        episodeList: [
+          createEpisode({
+            id: `podcast-1`,
+            title: `Podcast 1`,
+            description: `Descrição do podcast 1`,
+          }),
+        ],
+        hasNext: true,
+      };
+
+      render(
+        <PlayerContext.Provider value={mockContextValue}>
+          <Player />
+        </PlayerContext.Provider>
+      );
+
+      userEvent.click(screen.getByRole('button', { name: /tocar próxima/i }));
+      expect(mockContextValue.playNextEpisode).toHaveBeenCalled();
+    });
   });
 });
