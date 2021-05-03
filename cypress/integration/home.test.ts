@@ -1,3 +1,5 @@
+const baseUrl: string = Cypress.config().baseUrl;
+
 type Episode = {
   id: string;
   title: string;
@@ -10,12 +12,6 @@ type Episode = {
   publishedAt: string;
 };
 
-// Cypress.on('uncaught:exception', (err, runnable) => {
-//   // returning false here prevents Cypress from
-//   // failing the test
-//   return false;
-// });
-
 describe('Home page', () => {
   let episodes: Episode[] = [];
 
@@ -26,7 +22,7 @@ describe('Home page', () => {
   });
 
   beforeEach(() => {
-    cy.viewport(1530, 670);
+    cy.viewport(1530, 730);
     cy.visit('/');
   });
 
@@ -78,8 +74,6 @@ describe('Home page', () => {
   });
 
   it('should play an episode from the home page', () => {
-    cy.viewport(1530, 730);
-
     // 1 - click on the play button of the first episode in the "All episodes" section
     cy.findByRole('table').within(() => {
       cy.findAllByRole('button', { name: /tocar episódio/i })
@@ -97,5 +91,15 @@ describe('Home page', () => {
 
     // 3 - check if the tag <audio> exist in the page
     cy.get('audio').should('exist');
+  });
+
+  describe('should redirect to episode page when user clicks on the link of the episode', () => {
+    it('link from the latest episodes', () => {
+      // 1 - click on the link of the first episode in the "All episodes" section
+      cy.findByRole('table').within(() => {
+        cy.findAllByRole('link', { name: episodes[2].title }).click();
+        cy.url().should('equal', `${baseUrl}/episodes/${episodes[2].id}`);
+      });
+    });
   });
 });
