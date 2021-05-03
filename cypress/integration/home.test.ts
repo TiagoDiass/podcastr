@@ -22,7 +22,7 @@ describe('Home page', () => {
   });
 
   beforeEach(() => {
-    cy.viewport(1530, 730);
+    cy.viewport(1530, 950);
     cy.visit('/');
   });
 
