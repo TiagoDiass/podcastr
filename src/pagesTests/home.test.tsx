@@ -102,7 +102,7 @@ describe('Home page', () => {
     expect(allEpisodesTableElement.querySelector('tbody').children).toHaveLength(4);
   });
 
-  it('should call playList from context when user clicks on the play button in one of the latest episodes', () => {
+  it('should call playList() from context when user clicks on the play button in one of the latest episodes', () => {
     const latestEpisodes = [
       createEpisode({
         id: 'podcast-1',
@@ -127,7 +127,7 @@ describe('Home page', () => {
     expect(mockContextValue.playList).toHaveBeenCalledWith(latestEpisodes, 0);
   });
 
-  it('should call playList from context when user clicks on the play button in one of the all episodes', () => {
+  it('should call playList() from context when user clicks on the play button in one of the all episodes', () => {
     const allEpisodes = [3, 4, 5, 6].map(i =>
       createEpisode({
         id: `podcast-${i}`,

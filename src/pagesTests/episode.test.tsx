@@ -42,7 +42,7 @@ const makeSut = (episode: Episode) => {
 };
 
 describe('Episode page', () => {
-  it('should call play from context when user clicks on play button', () => {
+  it('should call play() from context when user clicks on play button', () => {
     const episode: Episode = {
       id: 'podcast 1',
       title: 'Podcast 1',

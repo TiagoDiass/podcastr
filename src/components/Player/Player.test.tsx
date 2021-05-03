@@ -71,7 +71,7 @@ describe('Player component', () => {
   });
 
   describe('Play / Pause button', () => {
-    it('should show a pause button and call togglePlay when user clicks on it', () => {
+    it('should show a pause button and call togglePlay() when user clicks on it', () => {
       const mockContextValue: PlayerContextData = {
         ...baseMockContext,
         episodeList: [
@@ -95,7 +95,7 @@ describe('Player component', () => {
       expect(HTMLAudioElement.prototype.play).toHaveBeenCalled();
     });
 
-    it('should show a play button and call togglePlay when user clicks on it', () => {
+    it('should show a play button and call togglePlay() when user clicks on it', () => {
       const mockContextValue: PlayerContextData = {
         ...baseMockContext,
         episodeList: [
@@ -163,7 +163,7 @@ describe('Player component', () => {
       expect(screen.getByRole('button', { name: /embaralhar/i })).toBeEnabled();
     });
 
-    it('should call toggleShuffle from context if user clicks on shuffle button', () => {
+    it('should call toggleShuffle() from context if user clicks on shuffle button', () => {
       const mockContextValue: PlayerContextData = {
         ...baseMockContext,
         episodeList: [1, 2].map(i =>
@@ -231,7 +231,7 @@ describe('Player component', () => {
       expect(screen.getByRole('button', { name: /tocar anterior/i })).toBeEnabled();
     });
 
-    it('should call playPreviousEpisode from context when user clicks on the playPrevious button', () => {
+    it('should call playPreviousEpisode() from context when user clicks on the playPrevious button', () => {
       const mockContextValue: PlayerContextData = {
         ...baseMockContext,
         episodeList: [
@@ -300,7 +300,7 @@ describe('Player component', () => {
       expect(screen.getByRole('button', { name: /tocar próxima/i })).toBeEnabled();
     });
 
-    it('should call playNextEpisode from context when user clicks on the playNext button', () => {
+    it('should call playNextEpisode() from context when user clicks on the playNext button', () => {
       const mockContextValue: PlayerContextData = {
         ...baseMockContext,
         episodeList: [
@@ -361,7 +361,7 @@ describe('Player component', () => {
       expect(screen.getByRole('button', { name: /repetir/i })).toBeEnabled();
     });
 
-    it('should call toggleLoop from context if user clicks on the repeat button', () => {
+    it('should call toggleLoop() from context if user clicks on the repeat button', () => {
       const mockContextValue: PlayerContextData = {
         ...baseMockContext,
         episodeList: [
