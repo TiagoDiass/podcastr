@@ -10,6 +10,12 @@ type Episode = {
   publishedAt: string;
 };
 
+// Cypress.on('uncaught:exception', (err, runnable) => {
+//   // returning false here prevents Cypress from
+//   // failing the test
+//   return false;
+// });
+
 describe('Home page', () => {
   let episodes: Episode[] = [];
 
@@ -69,5 +75,27 @@ describe('Home page', () => {
 
     // 4 - the tag <audio> shouldn't exist in the page
     cy.get('audio').should('not.exist');
+  });
+
+  it('should play an episode from the home page', () => {
+    cy.viewport(1530, 730);
+
+    // 1 - click on the play button of the first episode in the "All episodes" section
+    cy.findByRole('table').within(() => {
+      cy.findAllByRole('button', { name: /tocar episódio/i })
+        .first()
+        .click();
+    });
+
+    // 2 - check if the player is with everything correct
+    cy.get('aside').within(() => {
+      cy.get('div>strong').should('contain.text', episodes[2].title);
+      cy.findAllByRole('button').should('be.enabled');
+      cy.findByRole('button', { name: /tocar/i }).should('not.exist');
+      cy.findByRole('button', { name: /pausar/i }).should('exist');
+    });
+
+    // 3 - check if the tag <audio> exist in the page
+    cy.get('audio').should('exist');
   });
 });
