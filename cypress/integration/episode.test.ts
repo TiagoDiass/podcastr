@@ -30,4 +30,9 @@ describe('Episode page', () => {
     cy.findByRole('img', { name: /podcastr/i }).click();
     cy.url().should('equal', `${baseUrl}/`);
   });
+
+  it('should redirect user to the home page when clicks on back button', () => {
+    cy.findByRole('button', { name: /voltar/i }).click();
+    cy.url().should('equal', `${baseUrl}/`);
+  });
 });
