@@ -26,6 +26,12 @@ describe('Episode page', () => {
     cy.visit(`/episodes/${episodes[1].id}`);
   });
 
+  it('should render correctly', () => {
+    cy.findByRole('heading', { name: episodes[1].title }).should('exist');
+    cy.findByRole('button', { name: /tocar episódio/i }).should('exist');
+    cy.findByRole('button', { name: /voltar/i }).should('exist');
+  });
+
   it('should redirect user to the home page when clicks on logo', () => {
     cy.findByRole('img', { name: /podcastr/i }).click();
     cy.url().should('equal', `${baseUrl}/`);
