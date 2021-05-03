@@ -1,18 +1,18 @@
-const baseUrl: string = Cypress.config().baseUrl;
-
-type Episode = {
-  id: string;
-  title: string;
-  description: string;
-  thumbnail: string;
-  members: string;
-  duration: number;
-  durationString: string;
-  url: string;
-  publishedAt: string;
-};
-
 describe('Home page', () => {
+  const baseUrl: string = Cypress.config().baseUrl;
+
+  type Episode = {
+    id: string;
+    title: string;
+    description: string;
+    thumbnail: string;
+    members: string;
+    duration: number;
+    durationString: string;
+    url: string;
+    publishedAt: string;
+  };
+
   let episodes: Episode[] = [];
 
   before(function () {
