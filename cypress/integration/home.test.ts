@@ -94,12 +94,14 @@ describe('Home page', () => {
   });
 
   describe('should redirect to episode page when user clicks on the link of the episode', () => {
-    it('link from the latest episodes', () => {
-      // 1 - click on the link of the first episode in the "All episodes" section
-      cy.findByRole('table').within(() => {
-        cy.findAllByRole('link', { name: episodes[2].title }).click();
-        cy.url().should('equal', `${baseUrl}/episodes/${episodes[2].id}`);
-      });
+    it('link of an episode from the all episodes section', () => {
+      cy.findByRole('link', { name: episodes[2].title }).click();
+      cy.url().should('equal', `${baseUrl}/episodes/${episodes[2].id}`);
+    });
+
+    it('link of an episode from the latest episodes section', () => {
+      cy.findAllByRole('link', { name: episodes[1].title }).click();
+      cy.url().should('equal', `${baseUrl}/episodes/${episodes[1].id}`);
     });
   });
 });
