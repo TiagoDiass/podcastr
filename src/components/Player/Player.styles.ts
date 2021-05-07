@@ -108,6 +108,10 @@ export const Progress = styled.div<{ empty: boolean }>`
       border-radius: 2px;
     }
   }
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 export const Buttons = styled.div`

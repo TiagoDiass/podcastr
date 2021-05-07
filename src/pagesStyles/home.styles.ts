@@ -15,6 +15,10 @@ export const HomeContainer = styled.div`
   &::-webkit-scrollbar-thumb {
     background: var(--gray-200);
   }
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 `;
 
 export const Heading = styled.h2`
@@ -114,6 +118,19 @@ export const LatestEpisodes = styled.section`
         &:hover {
           filter: brightness(0.97);
         }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    ul {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1.5rem;
+      width: 100%;
+
+      li {
+        width: 100%;
       }
     }
   }
