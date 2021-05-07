@@ -12,6 +12,10 @@ const AppWrapper = styled.div`
   main {
     flex: 1;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export default function App({ Component, pageProps }) {

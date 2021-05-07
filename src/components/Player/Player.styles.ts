@@ -6,11 +6,17 @@ export const PlayerContainer = styled.aside`
   padding: 3rem 3.5rem;
 
   background: var(--purple-500);
-  color: #fff;;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    padding: 1.2rem 1rem;
+    height: 8rem;
+  }
 `;
 
 export const Header = styled.header`
@@ -21,6 +27,10 @@ export const Header = styled.header`
   strong {
     font-family: Lexend, sans-serif;
     font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -37,6 +47,10 @@ export const EmptyPlayer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const PlayingEpisode = styled.div`
@@ -59,10 +73,16 @@ export const PlayingEpisode = styled.div`
     opacity: 0.6;
     line-height: 1.5rem;
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Footer = styled.footer`
   align-self: stretch;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Progress = styled.div<{ empty: boolean }>`
@@ -132,5 +152,10 @@ export const Buttons = styled.div`
         filter: brightness(0.97);
       }
     }
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+    column-gap: 1.5rem;
   }
 `;

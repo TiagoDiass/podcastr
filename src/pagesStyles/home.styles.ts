@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const HomeContainer = styled.div`
   padding: 0 2rem;
-  height: calc(100vh - 6.5rem);
+  margin-top: 6.5rem;
+  height: calc(100vh - (6.5rem + 8rem));
   overflow-y: scroll;
 
   /* Scroll width */

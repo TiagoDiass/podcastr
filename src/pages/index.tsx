@@ -64,7 +64,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
           </ul>
         </S.LatestEpisodes>
 
-        <S.AllEpisodes>
+        {/* <S.AllEpisodes>
           <h2>Todos episódios</h2>
 
           <table cellSpacing={0}>
@@ -117,7 +117,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
               ))}
             </tbody>
           </table>
-        </S.AllEpisodes>
+        </S.AllEpisodes> */}
       </S.HomeContainer>
     </>
   );
