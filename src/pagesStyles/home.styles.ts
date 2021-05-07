@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 export const HomeContainer = styled.div`
   padding: 0 2rem;
-  margin-top: 6.5rem;
-  height: calc(100vh - (6.5rem + 8rem));
+  height: calc(100vh - 6.5rem);
   overflow-y: scroll;
 
   /* Scroll width */
@@ -18,6 +17,8 @@ export const HomeContainer = styled.div`
 
   @media (max-width: 768px) {
     padding: 0 1rem;
+    margin-top: 6.5rem;
+    height: calc(100vh - (6.5rem + 8rem));
   }
 `;
 
