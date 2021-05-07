@@ -13,6 +13,8 @@ export const PlayerContainer = styled.aside`
   justify-content: space-between;
 
   @media (max-width: 768px) {
+    position: fixed;
+    bottom: 0;
     width: 100vw;
     padding: 1.2rem 1rem;
     height: 8rem;
