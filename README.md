@@ -32,7 +32,8 @@
   :rocket: Used Technologies
 </h2>
 
-- [Next.js with TypeScript](https://nextjs.org/)- Next.js is a framework built on top of React. It was used to build the app in general. 
+- [Next.js](https://nextjs.org/)- Next.js is a framework built on top of React. It was used to build the app in general. 
+- [TypeScript](https://www.typescriptlang.org/) - Typescript is a superset of the common JavaScript. With that, we can type and maintain our code easier.
 - [Styled Components](https://styled-components.com/) - Styled components is a CSS-in-JS library. It was used to style the whole app.
 - [React Testing Library](https://testing-library.com/) - React Testing Library is a library that allows us to create unit and integration tests of React components. It was used to test the components.
 - [Cypress](https://www.cypress.io/) - Cypress is a library that allows us to create end to end tests on webpages. It was used to make the end to end tests on the website, this way we can make sure that the site will work correctly in production
