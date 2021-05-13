@@ -7,7 +7,7 @@
 </h4>
 
 <p align="center">
-  <img alt="Repo's top language" src="https://img.shields.io/static/v1?label=Main%20technology&message=React%2FNext.js%2FTypeScript&style=for-the-badge&color=2b7489&labelColor=000000">
+  <img alt="Repo's top languages" src="https://img.shields.io/static/v1?label=Main%20technologies&message=React%2FNext.js%2FTypeScript&style=for-the-badge&color=2b7489&labelColor=000000">
   <img alt="Repository size" src="https://img.shields.io/static/v1?label=Repo%20size&message=1.8%20MB&style=for-the-badge&color=2b7489&labelColor=000000">
 </p>
 
