@@ -15,7 +15,8 @@
   <a href="#technologies">Used Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#objective">Project's goal</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#final-result">Final Result</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#features">Features</a>
+  <a href="#features">Features</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#tests">Tests</a>
 </p>
 
 <h3 align="center">
@@ -50,12 +51,38 @@ The aim of this project was practicing Next.js with TypeScript, I have been stud
 
 ### [You can check the final result clicking here](https://podcastr-tiago.vercel.app/)
 
+### Home page
+<img width="100%" src="./screenshots/home_page.png" />
+
+### Podcast details page
+<img width="100%" src="./screenshots/episode_page.png" />
+
 <h2 id="features" name="features">
   :clipboard: Features
 </h2>
 
 - All the pages were statically generated, which improves the user experience since the page will not take long to load and be available to use.
-- User can play podcasts from the home page and from the page of the own episode as well.
+- User can:
+  - Play podcasts from the home page 
+  - Play podcasts from the podcast details page
+  - Go to the next episode from a playlist using a button of the player component
+  - Go to the previous episode from a playlist using a button of the player component
+  - Pause and play the current podcast that is active on the player
+  - Turn on a "random" mode for the player, in order to it play a random podcast when the current podcast finishes
+
+<h2 id="tests" name="tests">
+  🧪 Tests
+</h2>
+
+For this app, I have written unit tests using react-testing-library and jest, and I've also written end to end tests using Cypress, below you can take a look in some details of them.
+
+### Unit tests
+
+<img width="650" src="./screenshots/unit_tests.png" />
+
+### End to end tests
+
+<img src="./screenshots/end2end_tests.png" />
 
 ------
 
